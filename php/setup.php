@@ -20,15 +20,24 @@ function Directoki_database_setup() {
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
         dbDelta(  "CREATE TABLE ".$wpdb->prefix."directoki_link  (
-			id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			title VARCHAR(255) DEFAULT '' NOT NULL,
-			d_baseurl VARCHAR(255) NOT NULL,
+			d_base_url VARCHAR(255) NOT NULL,
 			d_project VARCHAR(255) NOT NULL,
 			d_directory VARCHAR(255) NOT NULL,
 			wp_post_type VARCHAR(255) NOT NULL,
 			active TINYINT(1) NOT NULL DEFAULT 1,
 			UNIQUE KEY id (id)
 		 ) CHARSET=".DB_CHARSET.";" );
+
+
+	    dbDelta(  "CREATE TABLE ".$wpdb->prefix."directoki_record  (
+			post_id MEDIUMINT UNSIGNED NOT NULL PRIMARY KEY,
+			link_id SMALLINT UNSIGNED NOT NULL,
+			record_id VARCHAR(255) NOT NULL
+		 ) CHARSET=".DB_CHARSET.";" );
+
+	    // UNIQUE KEY directoki (link_id,record_id) would be nice but key is to long!
 
 
 

@@ -101,9 +101,37 @@ class DirectokiModelLink {
     }
 
 
+    public function getListRecordsURL() {
+        return $this->directokiURL . '/api1/project/'.
+               $this->directokiProject.'/directory/'.
+               $this->directokiDirectory.'/records.json';
+    }
+
+    public function getRecordURL($recordID) {
+        return $this->directokiURL . '/api1/project/'.
+               $this->directokiProject.'/directory/'.
+               $this->directokiDirectory.'/record/'.
+               $recordID.'/index.json';
+    }
+
+}
+
+class DirectokiField {
+
+    protected $data;
 
 
+    public function __construct( $data ) {
+        $this->data = $data;
+    }
 
+    public function getTitle() {
+        return $this->data->title;
+    }
 
+    public function getValue() {
+        // TODO This must account for different types
+        return $this->data->value->value;
+    }
 }
 

@@ -12,6 +12,7 @@ License: BSD https://github.com/Directoki/Directoki-WordPress/blob/master/LICENS
 
 // ################################################## Libs
 require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'php'.DIRECTORY_SEPARATOR.'models.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'php'.DIRECTORY_SEPARATOR.'process.php');
 
 
 

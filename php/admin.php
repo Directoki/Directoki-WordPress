@@ -18,7 +18,22 @@ function Directoki_admin_menu() {
 
     echo '<div class="wrap"><h2>Directoki</h2>';
 
-    if (isset($_POST['action']) && $_POST['action'] == 'newlink') {
+    if (isset($_POST['action']) && $_POST['action'] == 'processlink' && isset($_POST['linkid']) && intval($_POST['linkid'])) {
+
+        $link = Directoki_db_getLink($_POST['linkid']);
+        if ($link) {
+
+            Directoki_process_link($link);
+
+            print '<p>Processed</p>';
+
+            print Directoki_admin_returnToMenuHTML();
+        } else {
+            // TODO
+        }
+
+
+    } else if (isset($_POST['action']) && $_POST['action'] == 'newlink') {
 
         Directoki_admin_process_new_link();
 
@@ -39,6 +54,12 @@ function Directoki_admin_menu() {
 
                 print "<div>Link: ". htmlspecialchars($link->getDirectokiURL()) . " / " . htmlspecialchars($link->getDirectokiProject()) . " / " .htmlspecialchars($link->getDirectokiDirectory()) . " <=> " . htmlspecialchars($link->getWordPressPostType())."</div>";
 
+
+                print '<form action="" method="post">';
+                print '<input type="hidden" name="linkid" value="'.$link->getId().'">';
+                print '<input type="hidden" name="action" value="processlink">';
+                print '<input type="submit" value="Process This Link Now">';
+                print '</form>';
 
 
             }
