@@ -1,0 +1,2 @@
+# Directoki WordPress Plugin
+
